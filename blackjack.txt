@@ -1,0 +1,190 @@
+import random
+
+suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
+ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
+values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8, 'Nine':9, 'Ten':10, 'Jack':10,
+         'Queen':10, 'King':10, 'Ace':11}
+
+
+class Cards():
+    def __init__(self,suit,rank):
+        self.suit=suit
+        self.rank=rank
+    def __string__():
+        return self.rank+' of '+self.suit
+    
+class Deck():
+    def __init__(self):
+        self.card_list=[]
+        for suit in suits:
+            for rank in ranks:
+                self.card_list.append(Cards(suit,rank))
+                
+    def __shuffle__(self):
+        random.shuffle(self.card_list)
+        return self.card_list
+    
+          
+class Hand():
+    def __init__(self,shuffled_list):
+        self.value=0
+        self.hand=shuffled_list.pop()
+        self.value=self.value+values[self.hand.rank]
+        self.rank=self.hand.rank
+        self.suit=self.hand.suit
+        #print(self.value)
+        #print(self.rank+ ' of '+self.suit)
+        
+    def __playervalue__(self):    
+        return self.value
+    def __playerrank__(self):
+        return self.rank
+    def __playersuit__(self):
+        return self.suit
+
+class Playerdata():
+    def __init__(self,playervalue):
+        self.list=[]
+        self.list=self.list.append(playervalue)
+    def __data__(self):
+        print (self.list)
+        return self.list
+    
+
+    
+    
+while True:
+    player_name=input("Hi Sir whats your name??")
+    print("welcome "+player_name)
+    
+    query=input("do u want to play black jack??\ny/n")
+    if query== 'y':
+        playing=True
+    else:
+        playing=False
+        continue
+        
+    
+    while playing:
+        
+        dealer1=[]
+        player1=[]
+        
+        print("\n")
+        print("Dealers hand1:")
+        deck=Deck()
+        l1=deck.__shuffle__()
+        hand1=Hand(l1)
+        dealer1.append(hand1.__playervalue__())
+        print(dealer1)
+        print(hand1.__playerrank__()+' of '+hand1.__playersuit__())
+        
+        hand2=Hand(l1)
+        print("Dealers hand2:\n")
+        dealer1.append(hand2.__playervalue__())
+        print(dealer1)
+        print(hand2.__playerrank__()+' of '+hand2.__playersuit__())
+        print("----u cant see it")
+        
+        
+        
+        print("\n")
+        print("player hand1:\n")
+        deck=Deck()
+        l2=deck.__shuffle__()
+        hand3=Hand(l2)
+        player1.append(hand3.__playervalue__())
+        print(player1)
+        
+        print(hand3.__playerrank__()+' of '+hand3.__playersuit__())
+        
+        
+        
+        hand4=Hand(l2)
+        player1.append(hand4.__playervalue__())
+        print("player hand2:\n")
+        print(player1)
+        
+        print(hand4.__playerrank__()+' of '+hand4.__playersuit__())
+        
+        
+        y=0
+        for x in player1:
+            y+=x
+        print("player= "+str(y))            
+        
+        z=0
+        for x in dealer1:
+            z+=x
+        print("dealer= "+str(z))    
+        
+        
+        print("\n")
+        while True:
+            hitorstop=input("Hi sir, do you want to hit or stop??h/s")
+            if hitorstop=='h':
+                
+                
+                if(y>21):
+                    print("busted, Gameover")
+                    break
+                else:
+                    hand1=Hand(l1)
+                    player1.append(hand1.__playervalue__()) 
+                    print(player1)
+                    y=0
+                    for x in player1:
+                        y+=x
+                    print(y)    
+                    if(y>21):
+                        print("busted")
+                        break
+                    else:
+                        continue
+                break
+            elif hitorstop=='s':
+                if(z>21):
+                    print("you won,hurray")
+                    break
+                elif (z<17):
+                    while True:
+                        
+                        hand1=Hand(l1)
+                        dealer1.append(hand1.__playervalue__()) 
+                        print(dealer1)
+                        z=0
+                        for x in dealer1:
+                            z+=x
+                        print(z)
+                        if(z>21):
+                            print("u won, dealer was busted")
+                            break
+                        elif((z>=17)and(z<=21)):
+                            if y>=z:
+                                print("you won")
+                                break
+                            else:
+                                print("you loose")
+                                break
+                        else:
+                            continue
+                            
+                            
+                elif z>=17 and z<=21:
+                        if y>=z:
+                            print("you wooooon")
+                            
+                        else:
+                            print("you loooose")
+                            break
+                break   
+                                        
+            else:
+                continue
+        
+        
+        
+        break 
+    
+    
+    break
